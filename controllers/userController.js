@@ -23,9 +23,14 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.updateMe = catchAsync(async (req,res,next) => {
+exports.updateMe = catchAsync(async (req, res, next) => {
   if (req.body.password || req.body.passwordConfirm) {
-    return next(new AppError('This route is not for password updates. Please use /updateMyPassword.', 400));
+    return next(
+      new AppError(
+        'This route is not for password updates. Please use /updateMyPassword.',
+        400
+      )
+    );
   }
   // 2) Filtered out unwanted fields names that are not allowed to be updated
   const filteredBody = filterObj(req.body, 'name', 'email');
