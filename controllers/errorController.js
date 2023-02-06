@@ -36,16 +36,16 @@ const sendErrorDev = (err, res) => {
 };
 
 const sendErrorProd = (err, res) => {
-  // Operational, trusted error: send message to client
+  // Operational, trusted error.pug: send message to client
   if (err.isOperational) {
     res.status(err.statusCode).json({
       status: err.status,
       message: err.message
     });
 
-    // Programming or other unknown error: don't leak error details
+    // Programming or other unknown error.pug: don't leak error.pug details
   } else {
-    // 1) Log error
+    // 1) Log error.pug
     console.error('ERROR 💥', err);
 
     // 2) Send generic message
