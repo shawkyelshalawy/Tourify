@@ -1,7 +1,7 @@
 const express = require('express');
-const tourController = require('./../controllers/tourController');
-const authController = require('./../controllers/authController');
-const reviewRouter = require('./../routes/reviewRoutes');
+const tourController = require('../controllers/tourController');
+const authController = require('../controllers/authController');
+const reviewRouter = require('./reviewRoutes');
 
 const router = express.Router();
 
@@ -22,7 +22,7 @@ router
 
 router
   .route('/tours-within/:distance/center/:latlng/unit/:unit')
-  .get(tourController.getToursWithin);
+  .get(tourController.getTourWithin);
 
 router.route('/distances/:latlng/unit/:unit').get(tourController.getDistances);
 
@@ -34,13 +34,14 @@ router
     authController.restrictTo('admin', 'lead-guide'),
     tourController.createTour
   );
-
 router
   .route('/:id')
   .get(tourController.getTour)
   .patch(
     authController.protect,
     authController.restrictTo('admin', 'lead-guide'),
+    tourController.uploadTourImages,
+    tourController.resizeTourImages,
     tourController.updateTour
   )
   .delete(
