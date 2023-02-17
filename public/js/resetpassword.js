@@ -8,8 +8,8 @@ export const resetPassword = async (password, passwordConfirm, resetToken) => {
       url: `/api/v1/users/resetpassword/${resetToken}`,
       data: {
         password: password,
-        passwordConfirm: passwordConfirm,
-      },
+        passwordConfirm: passwordConfirm
+      }
     });
     if (res.data.status === 'success') {
       showAlert('success', 'Password changed successfully');

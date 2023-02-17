@@ -147,7 +147,7 @@ if (resetPasswordForm) {
 // BOOKING PAYMENT BUTTON
 if (bookBtn) {
   bookBtn.addEventListener('click', (e) => {
-    e.target.innerText = 'Processing...';
+    e.target.textContent = 'Processing...';
     const { tourId } = e.target.dataset;
     bookTour(tourId);
   });

@@ -1,18 +1,30 @@
 const express = require('express');
-const viewsController = require('../controllers/viewsController');
+const viewController = require('../controllers/viewsController');
 const authController = require('../controllers/authController');
+const bookingController = require('../controllers/bookingController');
 
 const router = express.Router();
 
-router.get('/', authController.isLoggedIn, viewsController.getOverview);
-router.get('/tour/:slug', authController.isLoggedIn, viewsController.getTour);
-router.get('/login', authController.isLoggedIn, viewsController.getLoginForm);
-router.get('/me', authController.protect, viewsController.getAccount);
+router.use(viewController.alerts);
+
+router.get(
+  '/',
+  // bookingController.createBookingCheckout,
+  authController.isLoggedIn,
+  viewController.getOverview
+);
+router.get('/tour/:slug', authController.isLoggedIn, viewController.getTour);
+router.get('/login', authController.isLoggedIn, viewController.getLoginForm);
+router.get('/signup', viewController.getSignupForm);
+router.get('/me', authController.protect, viewController.getAccount);
+router.get('/my-tours', authController.protect, viewController.getMyTours);
+router.get('/forgotpassword', viewController.forgotPassword);
+router.get('/resetpassword/:resetToken', viewController.resetPassword);
 
 router.post(
   '/submit-user-data',
   authController.protect,
-  viewsController.updateUserData
+  viewController.updateUserData
 );
 
 module.exports = router;
