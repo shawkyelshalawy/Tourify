@@ -1,4 +1,4 @@
-# Tour_Booking
+# Tourify
 A  tour booking web application developed using  NodeJS, Express, MongoDB 
 
 
